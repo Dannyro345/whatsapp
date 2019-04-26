@@ -42,4 +42,10 @@ export class HomePage {
     }
   }
 
+  remove(tarefa) {
+    var i = this.tarefas.indexOf(tarefa);
+    this.tarefas.splice(i, 1);
+
+  }
+
 }
