@@ -48,4 +48,12 @@ export class HomePage {
 
   }
 
+  edit(tarefa) {
+    this.nova_tarefa = tarefa
+
+    var i = this.tarefas.indexOf(tarefa);
+    this.tarefas.splice(i, 1);
+
+  }
+
 }
