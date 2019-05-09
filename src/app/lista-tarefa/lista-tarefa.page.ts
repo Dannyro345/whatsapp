@@ -1,15 +1,12 @@
-import { Component } from '@angular/core';
-// #1 - Importando o metodo Toast
+import { Component, OnInit } from '@angular/core';
 import { ToastController, AlertController } from '@ionic/angular';
 
-
-
 @Component({
-  selector: 'app-home',
-  templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss'],
+  selector: 'app-lista-tarefa',
+  templateUrl: './lista-tarefa.page.html',
+  styleUrls: ['./lista-tarefa.page.scss'],
 })
-export class HomePage {
+export class ListaTarefaPage {
   title = "Lista | Tarefas";
   tarefas = [
     {
@@ -64,7 +61,7 @@ export class HomePage {
   async remove(tarefa) {
     const alert = await this.alertController.create({
       header: 'Confirmação!',
-      message: 'Tarefa removida co sucesso!!!',
+      message: 'Tarefa removida com sucesso!!!',
       buttons: [
         {
           text: 'Não',
@@ -75,7 +72,7 @@ export class HomePage {
           }
         }, {
           text: 'Ok',
-          handler: async() => {
+          handler: async () => {
             // Atualizar formulário
             this.nova_tarefa = tarefa
 
@@ -111,6 +108,4 @@ export class HomePage {
     this.tarefas.splice(i, 1);
 
   }
-
-
 }

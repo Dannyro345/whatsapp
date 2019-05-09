@@ -1,36 +1,26 @@
-import { Component } from '@angular/core';
-// #1 - Importando o metodo Toast
+import { Component, OnInit } from '@angular/core';
 import { ToastController, AlertController } from '@ionic/angular';
-
-
-
 @Component({
-  selector: 'app-home',
-  templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss'],
+  selector: 'app-lista-compra',
+  templateUrl: './lista-compra.page.html',
+  styleUrls: ['./lista-compra.page.scss'],
 })
-export class HomePage {
-  title = "Lista | Tarefas";
-  tarefas = [
-    {
-      "descricao": "Ir para o IFPI",
-      "horario": "18:00"
-    },
+export class ListaCompraPage  {
 
+  title = "Lista | Compras";
+  compras = [
     {
-      "descricao": "Dormir",
-      "horario": "05:00"
+      "descricao": "Vestido",
+      "valor": "100,00"
     },
-
     {
-      "descricao": "Comer",
-      "horario": "12:00"
+      "descricao": "Blusa",
+      "valor": "40,00"
     },
-
+    
   ];
 
-
-  nova_tarefa = this.criar_nova_tarefa();
+  nova_compra = this.criar_nova_compra();
 
   // #2 - Derclarar uma instância no construtor
   constructor(public toastController: ToastController, public alertController: AlertController) {
@@ -38,12 +28,12 @@ export class HomePage {
   }
 
   async add() {
-    this.tarefas.push(this.nova_tarefa);
-    this.nova_tarefa = this.criar_nova_tarefa();
+    this.compras.push(this.nova_compra);
+    this.nova_compra = this.criar_nova_compra();
 
     // #3 - Criando um Toast
     const toast = await this.toastController.create({
-      message: 'Nova tarefa cadastrada com sucesso!',
+      message: 'Novo produto cadastrado com sucesso!',
       duration: 3000,
       position: 'top',
       color: 'dark'
@@ -53,18 +43,18 @@ export class HomePage {
     toast.present();
   }
 
-  criar_nova_tarefa() {
+  criar_nova_compra() {
     return {
       "descricao": "",
-      "horario": ""
+      "valor": ""
 
     }
   }
 
-  async remove(tarefa) {
+  async remove(compra) {
     const alert = await this.alertController.create({
       header: 'Confirmação!',
-      message: 'Tarefa removida co sucesso!!!',
+      message: 'Produto removido com sucesso!!!',
       buttons: [
         {
           text: 'Não',
@@ -75,17 +65,17 @@ export class HomePage {
           }
         }, {
           text: 'Ok',
-          handler: async() => {
+          handler: async () => {
             // Atualizar formulário
-            this.nova_tarefa = tarefa
+            this.nova_compra = compra
 
             // Remover o item selecionado da lista
-            var i = this.tarefas.indexOf(tarefa);
-            this.tarefas.splice(i, 1);
+            var i = this.compras.indexOf(compra);
+            this.compras.splice(i, 1);
 
             // #3 - Criando um Toast
             const toast = await this.toastController.create({
-              message: 'Tarefa removida com sucesso!',
+              message: 'Produto removido com sucesso!',
               duration: 3000,
               position: 'top',
               color: 'dark'
@@ -104,13 +94,11 @@ export class HomePage {
 
   }
 
-  edit(tarefa) {
-    this.nova_tarefa = tarefa
+  edit(compra) {
+    this.nova_compra = compra
 
-    var i = this.tarefas.indexOf(tarefa);
-    this.tarefas.splice(i, 1);
+    var i = this.compras.indexOf(compra);
+    this.compras.splice(i, 1);
 
   }
-
-
 }
