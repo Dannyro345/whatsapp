@@ -7,6 +7,7 @@ const routes: Routes = [
   { path: 'lista-tarefa', loadChildren: './lista-tarefa/lista-tarefa.module#ListaTarefaPageModule' },
   { path: 'lista-compra', loadChildren: './lista-compra/lista-compra.module#ListaCompraPageModule' },
   { path: 'tarefa-detail/:task', loadChildren: './tarefa-detail/tarefa-detail.module#TarefaDetailPageModule' },
+  { path: 'compra-detail/:task', loadChildren: './compra-detail/compra-detail.module#CompraDetailPageModule' },
 ];
 
 @NgModule({
