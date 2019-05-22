@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastController, AlertController } from '@ionic/angular';
+import { Storage } from '@ionic/storage';
+
 @Component({
   selector: 'app-lista-compra',
   templateUrl: './lista-compra.page.html',
@@ -8,27 +10,26 @@ import { ToastController, AlertController } from '@ionic/angular';
 export class ListaCompraPage  {
 
   title = "Lista | Compras";
-  compras = [
-    {
-      "descricao": "Vestido",
-      "valor": "100,00"
-    },
-    {
-      "descricao": "Blusa",
-      "valor": "40,00"
-    },
-    
-  ];
+  compras = [];
+  compras_key = 'compras';
 
   nova_compra = this.criar_nova_compra();
 
   // #2 - Derclarar uma instância no construtor
-  constructor(public toastController: ToastController, public alertController: AlertController) {
-
+  constructor(public toastController: ToastController, public alertController: AlertController,  private storage: Storage) {
+    {
+      this.storage.get(this.compras_key).then((data) => {
+        if (data) {
+          this.compras = data;
+        }
+      })
+    }
   }
 
   async add() {
     this.compras.push(this.nova_compra);
+    this.storage.set(this.compras_key, this.compras);
+
     this.nova_compra = this.criar_nova_compra();
 
     // #3 - Criando um Toast
@@ -72,6 +73,7 @@ export class ListaCompraPage  {
             // Remover o item selecionado da lista
             var i = this.compras.indexOf(compra);
             this.compras.splice(i, 1);
+            this.storage.set('compras_key', this.compras);
 
             // #3 - Criando um Toast
             const toast = await this.toastController.create({
