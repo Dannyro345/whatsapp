@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title> Nova Compra </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-content>
+      <ion-item>
+        <ion-label>Descrição:</ion-label>
+        <ion-input [(ngModel)]="nova_compra.descricao"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Valor:</ion-label>
+        <ion-input [(ngModel)]="nova_compra.valor"></ion-input>
+      </ion-item>
+
+      <ion-button expand="block" (click)="add()">OK</ion-button>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

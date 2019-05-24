@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title> Nova Tarefa </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+
+    <ion-card-content>
+      <ion-item>
+        <ion-label>Descrição:</ion-label>
+        <ion-input [(ngModel)]="nova_tarefa.descricao"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Horario:</ion-label>
+        <ion-input [(ngModel)]="nova_tarefa.horario"></ion-input>
+      </ion-item>
+
+      <ion-button expand="block" (click)="add()">OK</ion-button>
+
+    </ion-card-content>
+
+  </ion-card>
+
+</ion-content>

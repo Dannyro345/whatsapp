@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 // #1 - Importando o metodo Toast
 import { ToastController, AlertController } from '@ionic/angular';
-
-
+import { NovaTarefaModalPage } from '../nova-tarefa-modal/nova-tarefa-modal.page';
 
 @Component({
   selector: 'app-home',
@@ -14,7 +13,7 @@ export class HomePage {
   tarefas = [
     {
       "descricao": "Ir para o IFPI",
-      "horario": "18:00"
+      "horario": "12:00"
     },
 
     {
@@ -75,7 +74,7 @@ export class HomePage {
           }
         }, {
           text: 'Ok',
-          handler: async() => {
+          handler: async () => {
             // Atualizar formulário
             this.nova_tarefa = tarefa
 
@@ -100,8 +99,6 @@ export class HomePage {
 
     await alert.present();
 
-
-
   }
 
   edit(tarefa) {
@@ -111,6 +108,5 @@ export class HomePage {
     this.tarefas.splice(i, 1);
 
   }
-
 
 }
