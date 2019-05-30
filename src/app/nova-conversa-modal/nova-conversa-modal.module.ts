@@ -5,12 +5,12 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { ListaTarefaPage } from './lista-tarefa.page';
+import { NovaConversaModalPage } from './nova-conversa-modal.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: ListaTarefaPage
+    component: NovaConversaModalPage
   }
 ];
 
@@ -21,6 +21,6 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [ListaTarefaPage]
+  declarations: [NovaConversaModalPage]
 })
-export class ListaTarefaPageModule {}
+export class NovaConversaModalPageModule {}

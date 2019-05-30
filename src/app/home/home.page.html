@@ -1,24 +1,50 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Home
+      {{title}}
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+
   <ion-list>
-    <ion-list-header>
-      <ion-label>Serviços</ion-label>
-    </ion-list-header>
 
-    <ion-item href="/lista-tarefa">
-      <ion-label>Lista de Tarefas</ion-label>
+    <ion-item *ngFor="let conversa of conversas" href="/conversa-detail/{{conversa.contato}}">
+      <ion-item-sliding>
+
+        <ion-item>
+          <ion-label>{{conversa.contato}}</ion-label>
+
+          <ion-label>{{conversa.imagem}}</ion-label>
+        </ion-item>
+
+        <ion-item-options side="end">
+          <ion-item-option (click)="remove(conversa)" color="light">
+            <ion-icon name="trash"></ion-icon>
+          </ion-item-option>
+        </ion-item-options>
+
+      </ion-item-sliding>
+
     </ion-item>
 
-    <ion-item href="/lista-compra">
-      <ion-label>Lista de Compras</ion-label>
-    </ion-item>
   </ion-list>
+
+  <ion-item *ngIf="conversas.length > 0">
+    <ion-label>Total conversas</ion-label>
+    <ion-label slot="end">{{conversas.length}}</ion-label>
+  </ion-item>
+
+  <ion-item *ngIf="conversas.length == 0">
+    <ion-label>Nenhuma conversa foi encontrada.</ion-label>
+  </ion-item>
+
+  <!-- fab placed to the top end -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" >
+    <ion-fab-button (click)='exibir_modal()'>
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 
 </ion-content>

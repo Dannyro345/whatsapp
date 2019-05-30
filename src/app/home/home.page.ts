@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
-// #1 - Importando o metodo Toast
-import { ToastController, AlertController } from '@ionic/angular';
-import { NovaTarefaModalPage } from '../nova-tarefa-modal/nova-tarefa-modal.page';
+// Importando o metodo Toast
+import { ToastController, AlertController, ModalController } from '@ionic/angular';
+import { Storage } from '@ionic/storage';
+import { NovaConversaModalPage } from '../nova-conversa-modal/nova-conversa-modal.page';
+
 
 @Component({
   selector: 'app-home',
@@ -9,61 +11,65 @@ import { NovaTarefaModalPage } from '../nova-tarefa-modal/nova-tarefa-modal.page
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-  title = "Lista | Tarefas";
-  tarefas = [
-    {
-      "descricao": "Ir para o IFPI",
-      "horario": "12:00"
-    },
 
-    {
-      "descricao": "Dormir",
-      "horario": "05:00"
-    },
+  title = "Conversas";
 
+  conversas = [
     {
-      "descricao": "Comer",
-      "horario": "12:00"
-    },
+      "contato": "",
+      "imagem": ""
+    }
 
   ];
 
+  // Criando a chave primária
+  conversas_key = 'conversas';
 
-  nova_tarefa = this.criar_nova_tarefa();
+  nova_conversa = this.criar_nova_conversa();
 
-  // #2 - Derclarar uma instância no construtor
-  constructor(public toastController: ToastController, public alertController: AlertController) {
+  constructor(public toastController: ToastController, public alertController: AlertController, private storage: Storage, public modalController: ModalController) {
 
+    {
+      this.storage.get(this.conversas_key).then((data) => {
+        if (data) {
+          this.conversas = data;
+        }
+      })
+    }
   }
 
-  async add() {
-    this.tarefas.push(this.nova_tarefa);
-    this.nova_tarefa = this.criar_nova_tarefa();
+  // Adicionando uma nova conversa
+  async add(conversa) {
+    this.conversas.push(this.nova_conversa);
+    this.nova_conversa = this.criar_nova_conversa();
 
-    // #3 - Criando um Toast
+    //Chave primária
+    this.storage.set('conversas_key', this.conversas);
+
+    // Criando um Toast
     const toast = await this.toastController.create({
-      message: 'Nova tarefa cadastrada com sucesso!',
+      message: 'Nova conversa cadastrada com sucesso!',
       duration: 3000,
       position: 'top',
       color: 'dark'
     });
 
-    // #4 Exibir a mensagem na tela
+    // Exibir a mensagem na tela
     toast.present();
   }
 
-  criar_nova_tarefa() {
+  criar_nova_conversa() {
     return {
-      "descricao": "",
-      "horario": ""
-
+      "contato": "",
+      "imagem": ""
     }
   }
 
-  async remove(tarefa) {
+  // Criando o metodo para remover
+  async remove(conversa) {
     const alert = await this.alertController.create({
       header: 'Confirmação!',
-      message: 'Tarefa removida co sucesso!!!',
+      message: 'Conversa removida com sucesso ! ',
       buttons: [
         {
           text: 'Não',
@@ -75,22 +81,22 @@ export class HomePage {
         }, {
           text: 'Ok',
           handler: async () => {
-            // Atualizar formulário
-            this.nova_tarefa = tarefa
+            // Atualizando o formulário na tela
+            this.nova_conversa = conversa
 
-            // Remover o item selecionado da lista
-            var i = this.tarefas.indexOf(tarefa);
-            this.tarefas.splice(i, 1);
+            // Excluindo o item da listagem
+            var i = this.conversas.indexOf(conversa);
+            this.conversas.splice(i, 1);
 
-            // #3 - Criando um Toast
+            // Criando um Toast
             const toast = await this.toastController.create({
-              message: 'Tarefa removida com sucesso!',
+              message: 'Conversa removida com sucesso!',
               duration: 3000,
               position: 'top',
               color: 'dark'
             });
 
-            // #4 Exibir a mensagem na tela
+            // Exibindo a mensagem na tela 
             toast.present();
           }
         }
@@ -98,15 +104,19 @@ export class HomePage {
     });
 
     await alert.present();
-
   }
 
-  edit(tarefa) {
-    this.nova_tarefa = tarefa
+  async exibir_modal() {
 
-    var i = this.tarefas.indexOf(tarefa);
-    this.tarefas.splice(i, 1);
+    const modal = await this.modalController.create({
+      component: NovaConversaModalPage
+    });
 
+    await modal.present();
+
+    modal.onDidDismiss().then((retorno) => {
+      this.add(retorno.data);
+    });
   }
 
 }

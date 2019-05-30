@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>NovoChat</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+
+    <ion-list-header>
+      <ion-label>Novo Chat</ion-label>
+    </ion-list-header>
+
+    <ion-card-content>
+
+      <ion-item>
+        <ion-label>Contato:</ion-label>
+        <ion-input [(ngModel)]="nova_conversa.contato"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Imagem:</ion-label>
+        <ion-input [(ngModel)]="nova_conversa.imagem"></ion-input>
+      </ion-item>
+
+      <ion-button expand="block" (click)="add()">OK</ion-button>
+
+    </ion-card-content>
+
+  </ion-card>
+</ion-content>

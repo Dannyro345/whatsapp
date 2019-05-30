@@ -1,22 +1,22 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ListaTarefaPage } from './lista-tarefa.page';
+import { NovaConversaModalPage } from './nova-conversa-modal.page';
 
-describe('ListaTarefaPage', () => {
-  let component: ListaTarefaPage;
-  let fixture: ComponentFixture<ListaTarefaPage>;
+describe('NovaConversaModalPage', () => {
+  let component: NovaConversaModalPage;
+  let fixture: ComponentFixture<NovaConversaModalPage>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ListaTarefaPage ],
+      declarations: [ NovaConversaModalPage ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ListaTarefaPage);
+    fixture = TestBed.createComponent(NovaConversaModalPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
